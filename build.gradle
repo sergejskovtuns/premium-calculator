@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+group 'com.proofit'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+}
+
+test {
+    useJUnitPlatform()
+}
