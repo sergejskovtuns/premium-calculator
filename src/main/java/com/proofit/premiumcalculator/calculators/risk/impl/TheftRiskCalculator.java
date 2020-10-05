@@ -23,7 +23,7 @@ public class TheftRiskCalculator implements RiskCalculator {
     }
 
     public BigDecimal calculate(BigDecimal sumInsured) {
-        BigDecimal coefficient = pickCoefficientBySumInsured(sumInsured);
+        var coefficient = pickCoefficientBySumInsured(sumInsured);
         return sumInsured.multiply(coefficient);
     }
 

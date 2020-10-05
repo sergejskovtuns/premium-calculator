@@ -21,7 +21,7 @@ public class SimplePremiumCalculator implements PremiumCalculator {
     }
 
     public BigDecimal calculate(Policy policy) {
-        Map<RiskType, BigDecimal> sumInsuredGroupedByRiskType = groupByRiskTypeAndReduceSumInsured(policy);
+        var sumInsuredGroupedByRiskType = groupByRiskTypeAndReduceSumInsured(policy);
 
         return sumInsuredGroupedByRiskType.entrySet().stream()
                 .map(entry -> calculatePremiumForRiskType(entry.getKey(), entry.getValue()))

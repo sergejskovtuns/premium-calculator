@@ -2,7 +2,7 @@ package com.proofit.premiumcalculator;
 
 import com.proofit.premiumcalculator.calculators.premium.PremiumCalculator;
 import com.proofit.premiumcalculator.factory.PremiumCalculatorFactory;
-import com.proofit.premiumcalculator.model.*;
+import com.proofit.premiumcalculator.model.RiskType;
 import com.proofit.premiumcalculator.model.policy.Policy;
 import com.proofit.premiumcalculator.model.policy.PolicyObject;
 import com.proofit.premiumcalculator.model.policy.PolicyStatus;
@@ -12,8 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.Currency;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.assertj.core.api.Assertions.assertThat;
 
 class PremiumCalculatorTest {
 
@@ -21,9 +20,9 @@ class PremiumCalculatorTest {
             .getPremiumCalculator(Currency.getInstance("EUR"));
 
     @Test
-    public void test1() {
+    public void test_100Fire8TheftPolicy() {
 
-        Policy policy = Policy.builder()
+        var policy = Policy.builder()
                 .withPolicyNumber("LV20-02-100000-5")
                 .withStatus(PolicyStatus.APPROVED)
                 .withPolicyObject(PolicyObject.builder()
@@ -41,15 +40,16 @@ class PremiumCalculatorTest {
                         .build())
                 .build();
 
-        BigDecimal result = premiumCalculator.calculate(policy);
+        var result = premiumCalculator.calculate(policy);
+        var expectedResult = BigDecimal.valueOf(2.28);
 
-        assertEquals(BigDecimal.valueOf(2.28), result);
+        assertThat(result).isEqualTo(expectedResult);
     }
 
     @Test
-    public void test2() {
+    public void test_500Fire102_51TheftPolicy() {
 
-        Policy policy = Policy.builder()
+        var policy = Policy.builder()
                 .withPolicyNumber("LV20-02-100000-5")
                 .withStatus(PolicyStatus.APPROVED)
                 .withPolicyObject(PolicyObject.builder()
@@ -67,9 +67,23 @@ class PremiumCalculatorTest {
                         .build())
                 .build();
 
-        BigDecimal result = premiumCalculator.calculate(policy);
+        var result = premiumCalculator.calculate(policy);
+        var expectedResult = BigDecimal.valueOf(17.13);
 
-        assertEquals(BigDecimal.valueOf(17.13), result);
+        assertThat(result).isEqualTo(expectedResult);
+    }
+
+    @Test
+    public void test_PremiumForEmptyPolicyShouldReturnZero() {
+
+        var policy = Policy.builder().build();
+
+        var result = premiumCalculator.calculate(policy);
+        var expectedResult = BigDecimal.valueOf(0, 2);
+
+        assertThat(result)
+                .as("check that for empty policy we have zero premium")
+                .isEqualTo(expectedResult);
     }
 
 }
