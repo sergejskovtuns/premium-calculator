@@ -42,16 +42,16 @@ To calculate premium provide or build `Policy` object and use `PremiumCalculator
 ## Implementation
 
 Overall calculation logic is following: 
-1) Grouping all policy sub objects by risk type
-2) Summing the sum insured for grouped sub objects
+1) Grouping all policy sub-objects by risk type
+2) Summing the sum insured for grouped sub-objects
 3) Applying coefficient based on risk type
 4) Summing premiums from every risk type
 
 In order to apply this logic calculation is split into two types: policy-based and risk-based calculation.
 
-Policy-based calculation is handled by `PremiumCalculatior` which groups policy sub objects by risk type, aggregates their sum insured and applying risk based logic on it.
+Policy-based calculation is handled by `PremiumCalculatior` which groups policy sub-objects by risk type, aggregates their sum insured, and applying risk-based logic on it.
 
-Risk-based calculation is handled by `RiskCalculator` that apply a different coefficient based on a given sum insured. 
+Risk-based calculation is handled by `RiskCalculator` that applies a different coefficient based on a given sum insured. 
 
 #### Adding new RiskCalculator
 
