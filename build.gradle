@@ -11,10 +11,12 @@ repositories {
 
 dependencies {
     implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
-    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
     testCompile group: 'org.assertj', name: 'assertj-core', version: '3.17.2'
 }
 
 test {
     useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
 }

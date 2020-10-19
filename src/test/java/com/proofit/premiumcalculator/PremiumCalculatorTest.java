@@ -41,7 +41,7 @@ class PremiumCalculatorTest {
                 .build();
 
         var result = premiumCalculator.calculate(policy);
-        var expectedResult = BigDecimal.valueOf(2.28);
+        var expectedResult = new BigDecimal("2.28");
 
         assertThat(result).isEqualTo(expectedResult);
     }
@@ -68,7 +68,7 @@ class PremiumCalculatorTest {
                 .build();
 
         var result = premiumCalculator.calculate(policy);
-        var expectedResult = BigDecimal.valueOf(17.13);
+        var expectedResult = new BigDecimal("17.13");
 
         assertThat(result).isEqualTo(expectedResult);
     }
@@ -79,7 +79,7 @@ class PremiumCalculatorTest {
         var policy = Policy.builder().build();
 
         var result = premiumCalculator.calculate(policy);
-        var expectedResult = BigDecimal.valueOf(0, 2);
+        var expectedResult = new BigDecimal("0.00");
 
         assertThat(result)
                 .as("check that for empty policy we have zero premium")
